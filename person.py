@@ -1,5 +1,4 @@
 class person:
-    #probably could've reduced some of this to a single init func
     def make_person(self):
         self.birth_year = 0000
         self.year_died = 0000
