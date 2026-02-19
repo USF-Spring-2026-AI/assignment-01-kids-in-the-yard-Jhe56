@@ -1,7 +1,7 @@
 class person:
     def __init__(self):
-        self.birth_year = 0000
-        self.year_died = 0000
+        self.birth_year = 0
+        self.year_died = 0
         self.first_name = "jane/john"
         self.last_name = "doe"
         self.gender = "female"
