@@ -9,12 +9,12 @@ class person:
     children = []
 
     #probably could've reduced some of this to a single init func
-    def add_first_name(self, firstName):
+    def set_first_name(self, firstName):
         self.first_name = firstName
     def get_first_name(self):
         return self.first_name
 
-    def add_last_name(self, lastName):
+    def set_last_name(self, lastName):
         self.last_name = lastName
     def get_last_name(self):
         return self.last_name
