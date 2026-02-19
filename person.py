@@ -3,7 +3,7 @@ class person:
     year_died = 0000
     first_name = "jane"
     last_name = "doe"
-    gender = "f"
+    gender = "female"
 
     #other persons
     spouse = None
