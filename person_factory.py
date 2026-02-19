@@ -19,5 +19,6 @@ class Person_factory:
         
         return self
     
+    #took a few rereads to understand this is generating a spouse for our first two people's children
     def get_person(year_born):
         pass
