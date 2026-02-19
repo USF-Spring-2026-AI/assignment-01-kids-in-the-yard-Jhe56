@@ -22,7 +22,7 @@ class person:
     def set_birth_year(self, birthYear):
         self.birth_year = birthYear
     def get_birth_year(self):
-        return self.birth_years
+        return self.birth_year
     
     def set_year_died(self, yearDied):
         self.year_died = yearDied
