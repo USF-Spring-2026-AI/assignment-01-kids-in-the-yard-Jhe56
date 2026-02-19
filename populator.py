@@ -2,6 +2,7 @@
 from person import Person
 from pandas import read_csv
 
+#print(fn['name'][0]) -- for legal reference
 fn = read_csv('first_names.csv')
 ln = read_csv('last_names.csv')
 
