@@ -1,15 +1,18 @@
 class person:
-    birth_year = 0000
-    year_died = 0000
-    first_name = "jane"
-    last_name = "doe"
-    gender = "female"
-
-    #other persons
-    spouse = None
-    children = []
-
     #probably could've reduced some of this to a single init func
+    def make_person(self):
+        self.birth_year = 0000
+        self.year_died = 0000
+        self.first_name = "jane/john"
+        self.last_name = "doe"
+        self.gender = "female"
+
+        #other persons
+        self.spouse = None
+        self.children = []
+    
+        return self
+
     def set_first_name(self, firstName):
         self.first_name = firstName
     def get_first_name(self):
