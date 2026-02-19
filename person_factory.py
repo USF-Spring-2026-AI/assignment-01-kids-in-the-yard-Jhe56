@@ -4,6 +4,7 @@ from pandas import read_csv
 
 #gpt recommends person factory
 class Person_factory:
+    #init is basically read files
     def __init__(self):
         #print(fn['name'][0]) -- for legal reference
         self.fn = read_csv('first_names.csv')
@@ -17,3 +18,6 @@ class Person_factory:
         self.rtp = read_csv('rank_to_probability.csv')
         
         return self
+    
+    def get_person(year_born):
+        pass
