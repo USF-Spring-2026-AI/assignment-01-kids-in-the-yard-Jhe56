@@ -1,5 +1,5 @@
 class person:
-    def make_person(self):
+    def __init__(self):
         self.birth_year = 0000
         self.year_died = 0000
         self.first_name = "jane/john"
