@@ -2,6 +2,8 @@
 from person import person
 from pandas import read_csv
 
-df = read_csv('first_names.csv')
+first_names = read_csv('first_names.csv')
+last_names = read_csv('last_names.csv')
 
-print(df['name'])
+#we get lifespan from: birth year through life expectancy + birth year
+life_span = read_csv('life_expectancy.csv')
