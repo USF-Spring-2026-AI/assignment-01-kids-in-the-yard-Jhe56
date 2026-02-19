@@ -1,4 +1,4 @@
-class person:
+class Person:
     def __init__(self):
         self.birth_year = 0
         self.year_died = 0
