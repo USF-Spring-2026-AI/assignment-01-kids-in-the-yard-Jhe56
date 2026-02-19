@@ -19,6 +19,14 @@ class Person_factory:
         
         return self
     
+    #Ryan's method: str(year_born/10) + "0s"
+    #child, generate married or not, generate spouse
     #took a few rereads to understand this is generating a spouse for our first two people's children
-    def get_person(year_born):
+    def get_person(year_born, ln_arg):
+        decade_index = str(year_born/10) + "0s"
+        
+        #also child-rearing rate is determined by decade not by marrital status
+        
+        #joint realization: empty ln_arg -- takes a random last name
+        #rather than inherited last name
         pass
