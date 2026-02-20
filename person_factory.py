@@ -1,6 +1,7 @@
 # Partnered with Ryan from 362 to follow along an outline of the project recommended by chatgpt
 from person import Person
 from pandas import read_csv
+from random import random
 
 #gpt recommends person factory
 class Person_factory:
@@ -27,14 +28,24 @@ class Person_factory:
         np = Person()
         np.set_birth_year(year_born)
 
+        #defaults for all people, year born, decade born, randomized gender
         decade_index = str(year_born/10) + "0s"
-        
 
+        #gender rng borrowed from google gemini
+        #person class has female defaulted for the gender
+        rand = random.randint(0,1)
+        if rand == 1:
+            np.set_gender("male")
+
+        #if the last name is empty then we're making a spouse
+        if len(ln_arg) == 0:
+            #set first name
+            #get last name
+            #get life expectancy
+            #get rank probability
+            return np
 
         #also child-rearing rate is determined by decade not by marrital status
         #define the number of children by the successor (adult child's statistic)
         #the spouse can be accessory
-        
-        #joint realization: empty ln_arg -- takes a random last name
-        #rather than inherited last name
         pass
