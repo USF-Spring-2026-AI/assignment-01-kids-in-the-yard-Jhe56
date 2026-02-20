@@ -1,7 +1,7 @@
 # Partnered with Ryan from 362 to follow along an outline of the project recommended by chatgpt
 from person import Person
 from pandas import read_csv
-from random import random
+import random
 
 #gpt recommends person factory
 class Person_Factory:
@@ -43,6 +43,16 @@ class Person_Factory:
                 #gpt helped with iloc
                 return ln_arr.iloc[i]["LastName"]
 
+    #chatgpt gave me a version I based this off of, that used randint instead of random.randint
+    #at the same time it's method of getting expected life span was kind of meh
+    def life_expectancy(self, birth_year):
+        expected = self.le[self.le["Year"] == birth_year]["Period life expectancy at birth"].values[0]
+        r = random.randint(0,1)
+
+        if r == 1:
+            return int(birth_year + (expected + 10))
+        
+        return int(birth_year + (expected - 10))
 
     #so each of these functions are going to be expected to come from a Person_Factory instance
     def get_person(self,year_born, ln_arg):
@@ -66,8 +76,12 @@ class Person_Factory:
             #get last name
             np.set_last_name(self.find_last_name(decade_index))
             #get life expectancy
-            #get rank probability
+            np.set_year_died(self.life_expectancy(year_born))
             return np
+
+        np.set_first_name(self.find_name(decade_index, np.get_gender()))
+        np.set_last_name(ln_arg)
+        np.set_year_died(self.life_expectancy(year_born))
 
         #also child-rearing rate is determined by decade not by marrital status
         #define the number of children by the successor (adult child's statistic)
@@ -75,4 +89,5 @@ class Person_Factory:
         pass
 
 test_factory = Person_Factory()
-print(test_factory.find_last_name("1950s"))
+
+print(test_factory.life_expectancy(1950))
