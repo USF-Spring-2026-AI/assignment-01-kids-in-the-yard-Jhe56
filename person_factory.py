@@ -20,6 +20,13 @@ class Person_factory:
         
         return self
     
+    #chatgpt recommended implementing a cumulative sum iterator to find the range that our random() would best fit in
+    #haggled with chatgpt for a while before understanding that the range of [0.0134 - 0.0134+0.0123]
+    #or aka that the range [0.0134 - 0.0157] that range is a slice of the whole 1 that's equal to the probability 0.0123
+    def find_name(decade,probability):
+        for i = 0; i < len()
+        return ""
+
     #Ryan's method: str(year_born/10) + "0s"
     #child, generate married or not, generate spouse
     #took a few rereads to understand this is generating a spouse for our first two people's children
