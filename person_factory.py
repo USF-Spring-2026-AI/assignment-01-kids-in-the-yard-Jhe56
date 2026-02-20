@@ -26,6 +26,24 @@ class Person_Factory:
         for i in range (len(probability)):
             if r < probability[i]:
                 return names[i]
+            
+    def find_last_name(self,decade):
+        r = random()
+        ln_arr = self.ln[self.ln["Decade"] == decade]
+        arr = test_factory.rtp.to_numpy()
+        #chat gpt claims we need to normalize our probabilities since they don't sum up to 1
+        total_prob = sum(arr)
+
+        if len(ln_arr) != len(arr):
+            return "poppyseed"
+
+        cumulative_sum = 0;
+        for i in range (len(arr)):
+            cumulative_sum += (arr[i]/total_prob)
+            if r < cumulative_sum:
+                #gpt helped with iloc
+                return ln_arr.iloc[i]["LastName"]
+
 
     #so each of these functions are going to be expected to come from a Person_Factory instance
     def get_person(self,year_born, ln_arg):
@@ -47,7 +65,7 @@ class Person_Factory:
             #set first name
             np.set_first_name(self.find_name(decade_index, np.get_gender()))
             #get last name
-
+            np.set_last_name(self.find_last_name(decade_index))
             #get life expectancy
             #get rank probability
             return np
@@ -58,4 +76,4 @@ class Person_Factory:
         pass
 
 test_factory = Person_Factory()
-print(test_factory.rtp.columns)
+print(test_factory.find_last_name("1950s"))
