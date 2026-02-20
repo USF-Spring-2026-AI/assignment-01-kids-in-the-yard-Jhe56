@@ -12,6 +12,11 @@ class Person:
     
         return self
 
+    def set_gender(self, g):
+        self.gender = g
+    def get_gender(self):
+        return self.gender
+
     def set_first_name(self, firstName):
         self.first_name = firstName
     def get_first_name(self):
