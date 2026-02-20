@@ -29,7 +29,8 @@ class Person_Factory:
             
     def find_last_name(self,decade):
         r = random()
-        ln_arr = self.ln[self.ln["Decade"] == decade]
+        #revised by gpt
+        ln_arr = self.ln[self.ln["Decade"].str.strip() == decade]
         arr = test_factory.rtp.to_numpy()
         #chat gpt claims we need to normalize our probabilities since they don't sum up to 1
         total_prob = sum(arr)
