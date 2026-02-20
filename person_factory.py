@@ -51,7 +51,12 @@ class Person_Factory:
         return round(base_children-1.5)
     
     def is_married(self, decade):
-        pass
+        r = random()
+        marriage_rate = self.bmr[self.bmr["decade"] == decade]["marriage_rate"].values[0]
+        if r >= marriage_rate:
+            #we can redefine the successor's spouse later.
+            return Person()
+        return None
 
     #chatgpt gave me a version I based this off of, that used randint instead of random.randint
     #at the same time it's method of getting expected life span was kind of meh
@@ -93,10 +98,8 @@ class Person_Factory:
         np.set_first_name(self.find_name(decade_index, np.get_gender()))
         np.set_last_name(ln_arg)
         np.set_year_died(self.life_expectancy(year_born))
-
-        #also child-rearing rate is determined by decade not by marrital status
-        #define the number of children by the successor (adult child's statistic)
-        #the spouse can be accessory
+        np.set_children(decade_index)
+        np.set_spouse(decade_index)
         return np
 
 test_factory = Person_Factory()
