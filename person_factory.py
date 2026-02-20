@@ -7,21 +7,20 @@ from random import random
 class Person_Factory:
     #init is basically read files
     def __init__(self):
-        #print(fn['name'][0]) -- for legal reference
         self.fn = read_csv('first_names.csv')
         self.ln = read_csv('last_names.csv')
-
-        #we get le (life expectancy) from: birth year through life expectancy + birth year
         self.le = read_csv('life_expectancy.csv')
-
         self.bmr = read_csv('birth_and_marriage_rates.csv')
         self.gnp = read_csv('gender_name_probability.csv')
         self.rtp = read_csv('rank_to_probability.csv')
 
-    #chatgpt recommended implementing a cumulative sum iterator to find the range that our random() would best fit in
+    #chatgpt recommended implementing a cumulative sum iterator 
     def find_name(self,decade,gender):
         r = random()
+
+        #this ln below was pulled from gpt suggestion
         subset = self.fn[(self.fn["decade"] == decade) & (self.fn["gender"] == gender)]
+
         probability = subset["frequency"].cumsum()
         names = subset["name"]
         for i in range (len(probability)):
@@ -46,8 +45,9 @@ class Person_Factory:
         #if the last name is empty then we're making a spouse
         if len(ln_arg) == 0:
             #set first name
-            self.find_name
+            np.set_first_name(self.find_name(decade_index, np.get_gender()))
             #get last name
+
             #get life expectancy
             #get rank probability
             return np
@@ -58,4 +58,4 @@ class Person_Factory:
         pass
 
 test_factory = Person_Factory()
-print(test_factory.find_name("1950s","male"))
+print(test_factory.rtp)
