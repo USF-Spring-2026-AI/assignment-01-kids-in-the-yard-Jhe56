@@ -9,6 +9,7 @@ class Person:
         #other persons
         self.spouse = None
         self.children = []
+        self.num_children = 0
 
     def set_gender(self, g):
         self.gender = g
@@ -40,6 +41,8 @@ class Person:
     def get_spouse(self):
         return self.spouse
     
+    def set_children(self, number):
+        self.num_children = number
     def add_child(self, smallPerson):
         self.children.append(smallPerson)
     def get_children(self):
