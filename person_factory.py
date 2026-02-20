@@ -58,4 +58,4 @@ class Person_Factory:
         pass
 
 test_factory = Person_Factory()
-print(test_factory.rtp)
+print(test_factory.rtp.columns)
