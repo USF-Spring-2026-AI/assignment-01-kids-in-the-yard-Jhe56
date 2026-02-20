@@ -29,13 +29,14 @@ class Person_Factory:
             
     def find_last_name(self,decade):
         r = random()
-        #revised by gpt
-        ln_arr = self.ln[self.ln["Decade"].str.strip() == decade]
-        arr = test_factory.rtp.to_numpy()
+        ln_arr = self.ln[self.ln["Decade"] == decade]
+        arr = test_factory.rtp.to_numpy(str)
         #chat gpt claims we need to normalize our probabilities since they don't sum up to 1
         total_prob = sum(arr)
 
         if len(ln_arr) != len(arr):
+            print("Filtered length:", len(ln_arr))
+            print("Prob length:", len(arr))
             return "poppyseed"
 
         cumulative_sum = 0;
