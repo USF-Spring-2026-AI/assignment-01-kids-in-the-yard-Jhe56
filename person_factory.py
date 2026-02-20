@@ -23,9 +23,17 @@ class Person_factory:
     #child, generate married or not, generate spouse
     #took a few rereads to understand this is generating a spouse for our first two people's children
     def get_person(year_born, ln_arg):
+        #np for new person
+        np = Person()
+        np.set_birth_year(year_born)
+
         decade_index = str(year_born/10) + "0s"
         
+
+
         #also child-rearing rate is determined by decade not by marrital status
+        #define the number of children by the successor (adult child's statistic)
+        #the spouse can be accessory
         
         #joint realization: empty ln_arg -- takes a random last name
         #rather than inherited last name
