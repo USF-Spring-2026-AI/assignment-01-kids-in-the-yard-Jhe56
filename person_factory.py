@@ -43,6 +43,16 @@ class Person_Factory:
                 #gpt helped with iloc
                 return ln_arr.iloc[i]["LastName"]
 
+    def has_children(self, decade):
+        r = random.randint(0,1)
+        base_children = self.bmr[self.bmr["decade"] == decade]["birth_rate"].values[0]
+        if r == 1:
+            return round(base_children+1.5)
+        return round(base_children-1.5)
+    
+    def is_married(self, decade):
+        pass
+
     #chatgpt gave me a version I based this off of, that used randint instead of random.randint
     #at the same time it's method of getting expected life span was kind of meh
     def life_expectancy(self, birth_year):
@@ -77,6 +87,7 @@ class Person_Factory:
             np.set_last_name(self.find_last_name(decade_index))
             #get life expectancy
             np.set_year_died(self.life_expectancy(year_born))
+            #we can later assert that the spouse person is married to the successor
             return np
 
         np.set_first_name(self.find_name(decade_index, np.get_gender()))
@@ -86,8 +97,8 @@ class Person_Factory:
         #also child-rearing rate is determined by decade not by marrital status
         #define the number of children by the successor (adult child's statistic)
         #the spouse can be accessory
-        pass
+        return np
 
 test_factory = Person_Factory()
 
-print(test_factory.life_expectancy(1950))
+print(test_factory.has_children("1950s"))
