@@ -4,7 +4,7 @@ from pandas import read_csv
 from random import random
 
 #gpt recommends person factory
-class Person_factory:
+class Person_Factory:
     #init is basically read files
     def __init__(self):
         #print(fn['name'][0]) -- for legal reference
@@ -17,20 +17,19 @@ class Person_factory:
         self.bmr = read_csv('birth_and_marriage_rates.csv')
         self.gnp = read_csv('gender_name_probability.csv')
         self.rtp = read_csv('rank_to_probability.csv')
-        
-        return self
-    
-    #chatgpt recommended implementing a cumulative sum iterator to find the range that our random() would best fit in
-    #haggled with chatgpt for a while before understanding that the range of [0.0134 - 0.0134+0.0123]
-    #or aka that the range [0.0134 - 0.0157] that range is a slice of the whole 1 that's equal to the probability 0.0123
-    def find_name(decade,probability):
-        for i = 0; i < len()
-        return ""
 
-    #Ryan's method: str(year_born/10) + "0s"
-    #child, generate married or not, generate spouse
-    #took a few rereads to understand this is generating a spouse for our first two people's children
-    def get_person(year_born, ln_arg):
+    #chatgpt recommended implementing a cumulative sum iterator to find the range that our random() would best fit in
+    def find_name(self,decade,gender):
+        r = random()
+        subset = self.fn[(self.fn["decade"] == decade) & (self.fn["gender"] == gender)]
+        probability = subset["frequency"].cumsum()
+        names = subset["name"]
+        for i in range (len(probability)):
+            if r < probability[i]:
+                return names[i]
+
+    #so each of these functions are going to be expected to come from a Person_Factory instance
+    def get_person(self,year_born, ln_arg):
         #np for new person
         np = Person()
         np.set_birth_year(year_born)
@@ -47,6 +46,7 @@ class Person_factory:
         #if the last name is empty then we're making a spouse
         if len(ln_arg) == 0:
             #set first name
+            self.find_name
             #get last name
             #get life expectancy
             #get rank probability
@@ -56,3 +56,6 @@ class Person_factory:
         #define the number of children by the successor (adult child's statistic)
         #the spouse can be accessory
         pass
+
+test_factory = Person_Factory()
+print(test_factory.find_name("1950s","male"))

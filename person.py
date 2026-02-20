@@ -9,8 +9,6 @@ class Person:
         #other persons
         self.spouse = None
         self.children = []
-    
-        return self
 
     def set_gender(self, g):
         self.gender = g
