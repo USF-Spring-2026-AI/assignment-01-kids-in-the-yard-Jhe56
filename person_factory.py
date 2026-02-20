@@ -12,7 +12,8 @@ class Person_Factory:
         self.le = read_csv('life_expectancy.csv')
         self.bmr = read_csv('birth_and_marriage_rates.csv')
         self.gnp = read_csv('gender_name_probability.csv')
-        self.rtp = read_csv('rank_to_probability.csv')
+        #fix for find last name: recommended by gpt
+        self.rtp = read_csv('rank_to_probability.csv', header=None)
 
     #chatgpt recommended implementing a cumulative sum iterator 
     def find_name(self,decade,gender):
@@ -30,14 +31,10 @@ class Person_Factory:
     def find_last_name(self,decade):
         r = random()
         ln_arr = self.ln[self.ln["Decade"] == decade]
-        arr = test_factory.rtp.to_numpy(str)
-        #chat gpt claims we need to normalize our probabilities since they don't sum up to 1
-        total_prob = sum(arr)
 
-        if len(ln_arr) != len(arr):
-            print("Filtered length:", len(ln_arr))
-            print("Prob length:", len(arr))
-            return "poppyseed"
+        #two lines offered by gpt
+        arr = self.rtp.iloc[0].to_numpy()
+        total_prob = arr.sum()
 
         cumulative_sum = 0;
         for i in range (len(arr)):
