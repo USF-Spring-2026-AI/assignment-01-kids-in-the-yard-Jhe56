@@ -93,11 +93,13 @@ class Person_Factory:
             #get life expectancy
             np.set_year_died(self.life_expectancy(year_born))
             #we can later assert that the spouse person is married to the successor
+            np.set_birth_year(year_born)
             return np
 
         np.set_first_name(self.find_name(decade_index, np.get_gender()))
         np.set_last_name(ln_arg)
         np.set_year_died(self.life_expectancy(year_born))
+        np.set_birth_year(year_born)
         np.set_children(decade_index)
         np.set_spouse(decade_index)
         return np
