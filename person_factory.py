@@ -112,12 +112,3 @@ class Person_Factory:
         np.set_children(decade_index)
         np.set_spouse(self.is_married(decade_index, year_born))
         return np
-
-test_factory = Person_Factory()
-test_person = test_factory.get_person(1950,"Jones")
-print(test_person.get_first_name(), " ", test_person.get_last_name())
-test_spouse = test_person.get_spouse()
-if test_spouse == None:
-    pass
-else:
-    print(test_spouse.get_first_name(), " ", test_spouse.get_last_name())
