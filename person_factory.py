@@ -65,6 +65,7 @@ class Person_Factory:
             spouse_by = year_born+older_by
             spouse = self.get_person(spouse_by,"")
             #defining the successor's spouse
+            print("in is married: ", spouse.get_first_name(), " ", spouse.get_last_name())
             return spouse
         return None
 
