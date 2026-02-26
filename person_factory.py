@@ -50,11 +50,13 @@ class Person_Factory:
             return round(base_children+1.5)
         return round(base_children-1.5)
     
+    #needs to take in date of birth to determine how many years older spouse is
+    #generate an actual person for spouse
     def is_married(self, decade):
         r = random()
         marriage_rate = self.bmr[self.bmr["decade"] == decade]["marriage_rate"].values[0]
         if r >= marriage_rate:
-            #we can redefine the successor's spouse later.
+            #defining the successor's spouse
             return Person()
         return None
 
