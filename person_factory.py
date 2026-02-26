@@ -101,7 +101,7 @@ class Person_Factory:
         np.set_year_died(self.life_expectancy(year_born))
         np.set_birth_year(year_born)
         np.set_children(decade_index)
-        np.set_spouse(decade_index)
+        np.set_spouse(self.is_married(decade_index))
         return np
 
 test_factory = Person_Factory()
