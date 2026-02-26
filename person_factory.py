@@ -23,7 +23,7 @@ class Person_Factory:
         probability = subset["frequency"].cumsum()
         names = subset["name"]
 
-        indx_ctr = 0
+        indx_ctr = names.first_valid_index()
         for i in probability:
             #we want the specific name at the index in a pandas.series
             if r < i:
