@@ -52,12 +52,16 @@ class Person_Factory:
     
     #needs to take in date of birth to determine how many years older spouse is
     #generate an actual person for spouse
-    def is_married(self, decade):
+    def is_married(self, decade, year_born):
         r = random()
         marriage_rate = self.bmr[self.bmr["decade"] == decade]["marriage_rate"].values[0]
         if r >= marriage_rate:
+            #calculating the random value
+            older_by = random.randint(0,10)
+            spouse_by = year_born+older_by
+            spouse = self.get_person(spouse_by)
             #defining the successor's spouse
-            return Person()
+            return spouse
         return None
 
     #chatgpt gave me a version I based this off of, that used randint instead of random.randint
@@ -103,7 +107,7 @@ class Person_Factory:
         np.set_year_died(self.life_expectancy(year_born))
         np.set_birth_year(year_born)
         np.set_children(decade_index)
-        np.set_spouse(self.is_married(decade_index))
+        np.set_spouse(self.is_married(decade_index, year_born))
         return np
 
 test_factory = Person_Factory()
