@@ -17,19 +17,21 @@ class Person_Factory:
 
     #chatgpt recommended implementing a cumulative sum iterator 
     def find_name(self,decade,gender):
-        r = random()
-
+        r = random.random()
         #this ln below was pulled from gpt suggestion
         subset = self.fn[(self.fn["decade"] == decade) & (self.fn["gender"] == gender)]
-
         probability = subset["frequency"].cumsum()
         names = subset["name"]
-        for i in range (len(probability)):
-            if r < probability[i]:
-                return names[i]
+
+        indx_ctr = 0
+        for i in probability:
+            #we want the specific name at the index in a pandas.series
+            if r < i:
+                return names[indx_ctr]
+            indx_ctr += 1
             
     def find_last_name(self,decade):
-        r = random()
+        r = random.random()
         ln_arr = self.ln[self.ln["Decade"] == decade]
 
         #two lines offered by gpt
@@ -53,7 +55,8 @@ class Person_Factory:
     #needs to take in date of birth to determine how many years older spouse is
     #generate an actual person for spouse
     def is_married(self, decade, year_born):
-        r = random()
+        r = random.random()
+
         marriage_rate = self.bmr[self.bmr["decade"] == decade]["marriage_rate"].values[0]
         if r >= marriage_rate:
             #calculating the random value
@@ -76,14 +79,13 @@ class Person_Factory:
         return int(birth_year + (expected - 10))
 
     #so each of these functions are going to be expected to come from a Person_Factory instance
-    def get_person(self,year_born, ln_arg):
+    def get_person(self,year_born,ln_arg):
         #np for new person
         np = Person()
         np.set_birth_year(year_born)
 
         #defaults for all people, year born, decade born, randomized gender
-        decade_index = str(year_born/10) + "0s"
-
+        decade_index = str(int(year_born/10)) + "0s"
         #gender rng borrowed from google gemini
         #person class has female defaulted for the gender
         rand = random.randint(0,1)
@@ -111,5 +113,5 @@ class Person_Factory:
         return np
 
 test_factory = Person_Factory()
-
-print(test_factory.has_children("1950s"))
+test_person = test_factory.get_person(1950,"Jones")
+print(test_person.get_spouse())
