@@ -58,11 +58,12 @@ class Person_Factory:
         r = random.random()
 
         marriage_rate = self.bmr[self.bmr["decade"] == decade]["marriage_rate"].values[0]
-        if r >= marriage_rate:
+
+        if r <= marriage_rate:
             #calculating the random value
             older_by = random.randint(0,10)
             spouse_by = year_born+older_by
-            spouse = self.get_person(spouse_by)
+            spouse = self.get_person(spouse_by,"")
             #defining the successor's spouse
             return spouse
         return None
@@ -114,4 +115,9 @@ class Person_Factory:
 
 test_factory = Person_Factory()
 test_person = test_factory.get_person(1950,"Jones")
-print(test_person.get_spouse())
+print(test_person.get_first_name(), " ", test_person.get_last_name())
+test_spouse = test_person.get_spouse()
+if test_spouse == None:
+    pass
+else:
+    print(test_spouse.get_first_name(), " ", test_spouse.get_last_name())
