@@ -65,7 +65,6 @@ class Person_Factory:
             spouse_by = year_born+older_by
             spouse = self.get_person(spouse_by,"")
             #defining the successor's spouse
-            print("in is married: ", spouse.get_first_name(), " ", spouse.get_last_name())
             return spouse
         return None
 
@@ -112,4 +111,10 @@ class Person_Factory:
         np.set_birth_year(year_born)
         np.set_children(decade_index)
         np.set_spouse(self.is_married(decade_index, year_born))
+
+        #set spouse's spouse to new person
+        temp_spouse = np.get_spouse()
+        if temp_spouse != None:
+            temp_spouse.set_spouse(np)
+
         return np
