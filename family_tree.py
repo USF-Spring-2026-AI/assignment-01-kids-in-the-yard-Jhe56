@@ -1,9 +1,11 @@
 from person import Person
 from person_factory import Person_Factory
+import queue
 
 class Family_Tree:
-    def __init__(self):
-        self.factory = Person_Factory()
+
+    #create our initial couple
+    def make_jones(self):
         #Desmond Jones
         self.DJ = Person()
         self.DJ.set_gender("male")
@@ -24,3 +26,31 @@ class Family_Tree:
 
         self.DJ.set_spouse(self.MJ)
         self.MJ.set_spouse(self.DJ)
+
+    def process_queue(tree_queue):
+        # while tree_queue != 
+        pass
+
+    def __init__(self):
+        self.factory = Person_Factory()
+        self.make_jones()
+
+        self.end_year = 2120
+        self.people_queue = queue()
+
+
+# class test:
+# 	def __init__(self):
+#             self.name = "molly"
+        
+# q = queue.Queue()
+# new_person = test()
+
+# q.put(new_person)
+# q.put(new_person)
+# q.put(new_person)
+
+#copilot this makes no sense...
+# while q.empty() == False:
+#     p_holder = q.get()
+#     print(p_holder.name)
