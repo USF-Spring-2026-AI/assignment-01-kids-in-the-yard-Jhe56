@@ -43,6 +43,8 @@ class Person:
     
     def set_children(self, number):
         self.num_children = number
+    def get_number_of_children(self):
+        return self.num_children
     def add_child(self, smallPerson):
         self.children.append(smallPerson)
     def get_children(self):
