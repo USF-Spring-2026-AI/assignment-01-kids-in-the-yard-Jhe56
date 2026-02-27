@@ -27,9 +27,21 @@ class Family_Tree:
         self.DJ.set_spouse(self.MJ)
         self.MJ.set_spouse(self.DJ)
 
-    def process_queue(tree_queue):
-        # while tree_queue != 
-        pass
+    def run_queue (self, tree_queue):
+        while tree_queue == False:
+            #we get a parent from the queue
+            p = tree_queue.get()
+            p_25_yo = p.get_birth_year() + 25
+            p_45_yo = p_25_yo + 20
+
+            children_num = p.get_number_of_children
+            years_apart = int(20/children_num)
+
+            #vsco-pilot generated loop
+            for i in range(children_num):
+                child = self.factory.get_person(p_25_yo + (i*years_apart), p.get_last_name())
+                p.add_child(child)
+                tree_queue.put(child)
 
     def __init__(self):
         self.factory = Person_Factory()
@@ -37,6 +49,10 @@ class Family_Tree:
 
         self.end_year = 2120
         self.people_queue = queue()
+
+        self.people_queue.put(self.MJ)
+
+        self.run_queue(self.people_queue)
 
 
 # class test:
