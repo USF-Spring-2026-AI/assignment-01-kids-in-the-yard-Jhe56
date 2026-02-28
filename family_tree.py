@@ -22,7 +22,7 @@ class Family_Tree:
         self.MJ.set_last_name("Jones")
         self.MJ.set_birth_year(1950)
         self.MJ.set_year_died(self.factory.life_expectancy)
-        self.MJ.set_children(self.factory.has_children)
+        self.MJ.set_children(self.factory.has_children("1950s"))
 
         self.DJ.set_spouse(self.MJ)
         self.MJ.set_spouse(self.DJ)
