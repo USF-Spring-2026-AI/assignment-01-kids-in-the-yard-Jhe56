@@ -49,7 +49,8 @@ class Family_Tree:
 
                 #add the child to the parents
                 p.add_child(child)
-                p_spouse.add_child(child)
+                if p_spouse != None:
+                    p_spouse.add_child(child)
             
             print(tree_queue.qsize())
 
