@@ -83,6 +83,8 @@ class Person_Factory:
 
     #so each of these functions are going to be expected to come from a Person_Factory instance
     def get_person(self,year_born,ln_arg):
+        if year_born > 2120:
+            year_born = 2120
         #np for new person
         np = Person()
         np.set_birth_year(year_born)

@@ -35,9 +35,10 @@ class Family_Tree:
             p_25_yo = p.get_birth_year() + 25
 
             children_num = p.get_number_of_children()
-            print("Number of children: ", children_num)
-            years_apart = int(20/children_num)
-           
+            years_apart = 20
+            if children_num > 0:
+                years_apart = int(years_apart/children_num)
+            
             #vsco-pilot generated loop
             for i in range(children_num):
                 if p_25_yo + (i*years_apart) > self.end_year:
@@ -52,7 +53,6 @@ class Family_Tree:
                 if p_spouse != None:
                     p_spouse.add_child(child)
             
-            print(tree_queue.qsize())
 
     def __init__(self):
         self.factory = Person_Factory()
