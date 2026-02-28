@@ -56,16 +56,18 @@ class Person_Factory:
     #generate an actual person for spouse
     def is_married(self, decade, year_born):
         r = random.random()
-
         marriage_rate = self.bmr[self.bmr["decade"] == decade]["marriage_rate"].values[0]
-
         if r <= marriage_rate:
-            #calculating the random value
-            older_by = random.randint(0,10)
-            spouse_by = year_born+older_by
-            spouse = self.get_person(spouse_by,"")
-            #defining the successor's spouse
-            return spouse
+            if year_born == 2120:
+                spouse = self.get_person(year_born, "")
+                return spouse
+            else:
+                #calculating the random value
+                older_by = random.randint(0,10)
+                spouse_by = year_born+older_by
+                spouse = self.get_person(spouse_by,"")
+                #defining the successor's spouse
+                return spouse
         return None
 
     #chatgpt gave me a version I based this off of, that used randint instead of random.randint
