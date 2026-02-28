@@ -1,6 +1,6 @@
 from person import Person
 from person_factory import Person_Factory
-import queue
+from queue import Queue
 
 class Family_Tree:
 
@@ -34,7 +34,8 @@ class Family_Tree:
             p_spouse = p.get_spouse()
             p_25_yo = p.get_birth_year() + 25
 
-            children_num = p.get_number_of_children
+            children_num = p.get_number_of_children()
+            print("Number of children: ", children_num)
             years_apart = int(20/children_num)
            
             #vsco-pilot generated loop
@@ -49,31 +50,19 @@ class Family_Tree:
                 #add the child to the parents
                 p.add_child(child)
                 p_spouse.add_child(child)
+            
+            print(tree_queue.qsize())
 
     def __init__(self):
         self.factory = Person_Factory()
         self.make_jones()
 
         self.end_year = 2120
-        self.people_queue = queue()
+        self.people_queue = Queue()
 
         self.people_queue.put(self.MJ)
 
         self.run_queue(self.people_queue)
 
-
-# class test:
-# 	def __init__(self):
-#             self.name = "molly"
-        
-# q = queue.Queue()
-# new_person = test()
-
-# q.put(new_person)
-# q.put(new_person)
-# q.put(new_person)
-
-#copilot this makes no sense...
-# while q.empty() == False:
-#     p_holder = q.get()
-#     print(p_holder.name)
+my_family_tree = Family_Tree()
+my_family_tree.run_queue(my_family_tree.people_queue)

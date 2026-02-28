@@ -111,7 +111,7 @@ class Person_Factory:
         np.set_last_name(ln_arg)
         np.set_year_died(self.life_expectancy(year_born))
         np.set_birth_year(year_born)
-        np.set_children(decade_index)
+        np.set_children(self.has_children(decade_index))
         np.set_spouse(self.is_married(decade_index, year_born))
 
         #set spouse's spouse to new person
