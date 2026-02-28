@@ -31,22 +31,24 @@ class Family_Tree:
         while tree_queue.empty() == False:
             #we get a parent from the queue
             p = tree_queue.get()
+            p_spouse = p.get_spouse()
             p_25_yo = p.get_birth_year() + 25
 
             children_num = p.get_number_of_children
             years_apart = int(20/children_num)
-            #we don't need to really keep track of parent's yearborn + 45 
-            #because with the children even spread through the next 20 years from birthyear+25
-            #it'll be hard to increment a child's birth year past the parent's 45th birth year
-
+           
             #vsco-pilot generated loop
             for i in range(children_num):
                 if p_25_yo + (i*years_apart) > self.end_year:
                     child = self.factory.get_person(self.end_year, p.get_last_name())
                 else:
                     child = self.factory.get_person(p_25_yo + (i*years_apart), p.get_last_name())
+                    #only enqueue the child for processing if they're born before the end year
+                    tree_queue.put(child)
+
+                #add the child to the parents
                 p.add_child(child)
-                tree_queue.put(child)
+                p_spouse.add_child(child)
 
     def __init__(self):
         self.factory = Person_Factory()
