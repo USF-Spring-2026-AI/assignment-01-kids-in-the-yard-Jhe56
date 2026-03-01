@@ -2,6 +2,7 @@
 from person import Person
 from pandas import read_csv
 import random
+import math
 
 #gpt recommends person factory
 class Person_Factory:
@@ -49,8 +50,8 @@ class Person_Factory:
         r = random.randint(0,1)
         base_children = self.bmr[self.bmr["decade"] == decade]["birth_rate"].values[0]
         if r == 1:
-            return round(base_children+1.5)
-        return round(base_children-1.5)
+            return math.ceil(base_children+1.5)
+        return math.ceil(base_children-1.5)
     
     #needs to take in date of birth to determine how many years older spouse is
     #generate an actual person for spouse

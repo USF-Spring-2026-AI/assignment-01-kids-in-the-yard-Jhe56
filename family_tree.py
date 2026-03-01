@@ -37,13 +37,14 @@ class Family_Tree:
             children_num = p.get_number_of_children()
             years_apart = 20
             if children_num > 0:
-                years_apart = int(years_apart/children_num)
-            
+                years_apart = int(20/children_num)
+
             #vsco-pilot generated loop
             for i in range(children_num):
                 if p_25_yo + (i*years_apart) > self.end_year:
                     child = self.factory.get_person(self.end_year, p.get_last_name())
                 else:
+                    print("Birth Year: ", p_25_yo + (i*years_apart))
                     child = self.factory.get_person(p_25_yo + (i*years_apart), p.get_last_name())
                     #only enqueue the child for processing if they're born before the end year
                     tree_queue.put(child)
@@ -64,17 +65,24 @@ class Family_Tree:
             count += 1
         return count
 
-    def decade_count(self, decade):
+    def decade_count(self):
         count_queue = Queue()
         count_queue.put(self.MJ)
         count = 0
+        decade = 1950
         while count_queue.empty() == False:
             p = count_queue.get()
             for c in p.get_children():
                 count_queue.put(c)
+            
+            if decade == 2130:
+                break
             if int(p.get_birth_year()/10) == int(decade/10):
                 count += 1
-        return count
+            else:
+                print("People born in the ", decade, "s: ", count)
+                decade += 10
+                count = 0
 
     def duplicate_names(self):
         count_queue = Queue()
@@ -102,4 +110,16 @@ class Family_Tree:
         self.people_queue.put(self.MJ)
 
         self.run_queue(self.people_queue)
+    
+Family_Tree_Instance = Family_Tree()
+while True:
+    cmd = input("Are you interested in: \n (T)otal people in the family tree \n (D)ecade count \n (N)ame duplicates \n (Q)uit \n")
+    if cmd == "T":
+        print("Total people in the family tree: ", Family_Tree_Instance.count_people())
+    elif cmd == "D":
+        Family_Tree_Instance.decade_count()
+    elif cmd == "N":
+        print("Duplicate names: ", Family_Tree_Instance.duplicate_names())
+    elif cmd == "Q":
+        break
 
