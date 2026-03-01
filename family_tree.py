@@ -1,6 +1,7 @@
 from person import Person
 from person_factory import Person_Factory
 from queue import Queue
+from collections import defaultdict
 
 class Family_Tree:
 
@@ -42,7 +43,7 @@ class Family_Tree:
             #vsco-pilot generated loop
             for i in range(children_num):
                 if p_25_yo + (i*years_apart) > self.end_year:
-                    child = self.factory.get_person(self.end_year, p.get_last_name())
+                    continue
                 else:
                     child = self.factory.get_person(p_25_yo + (i*years_apart), p.get_last_name())
                     #only enqueue the child for processing if they're born before the end year
@@ -53,51 +54,98 @@ class Family_Tree:
                 if p_spouse != None:
                     p_spouse.add_child(child)
 
+    #drafted by vscode, refined with chatgpt to consider the spouse
     def count_people(self):
         count_queue = Queue()
         count_queue.put(self.MJ)
+        count_queue.put(self.DJ)
+        
+        #chatgpt uses visited, a set to keep track of the id() of each person
+        visited = set()
         count = 0
         while count_queue.empty() == False:
             p = count_queue.get()
+            
+            #checks if the id of the person is in visited
+            if id(p) in visited:
+                continue
+            visited.add(id(p))
+
+            if p.get_spouse() != None:
+                count_queue.put(p.get_spouse())
+
             for c in p.get_children():
                 count_queue.put(c)
             count += 1
         return count
 
+    #gpt generated
     def decade_count(self):
         count_queue = Queue()
         count_queue.put(self.MJ)
-        count = 0
-        decade = 1950
-        while count_queue.empty() == False:
+        count_queue.put(self.DJ)
+
+        visited = set()
+        decade_counts = defaultdict(int)
+
+        while not count_queue.empty():
             p = count_queue.get()
+
+            # prevent double counting (important if spouses reference each other)
+            if id(p) in visited:
+                continue
+            visited.add(id(p))
+
+            # compute decade
+            birth_year = p.get_birth_year()
+            decade = (birth_year // 10) * 10
+            decade_counts[decade] += 1
+
+            # enqueue children
             for c in p.get_children():
                 count_queue.put(c)
             
-            if decade == 2130:
-                break
-            if int(p.get_birth_year()/10) == int(decade/10):
-                count += 1
-            else:
-                print("People born in the ", decade, "s: ", count)
-                decade += 10
-                count = 0
+            #added spouse
+            if p.get_spouse() != None:
+                count_queue.put(p.get_spouse())
 
+        # print sorted decades
+        for decade in sorted(decade_counts.keys()):
+            print(f"{decade}: {decade_counts[decade]}")
+
+    #drafted by vscode, refined with chatgpt to consider the spouse
     def duplicate_names(self):
         count_queue = Queue()
         count_queue.put(self.MJ)
+        count_queue.put(self.DJ)
+
+        visited = set()
         names = set()
         duplicates = set()
+
         while count_queue.empty() == False:
             p = count_queue.get()
+
+            #checks if the id of the person is in visited
+            if id(p) in visited:
+                continue
+            visited.add(id(p))
+
             for c in p.get_children():
                 count_queue.put(c)
+
+            if p.get_spouse() != None:
+                count_queue.put(p.get_spouse())
+
             name_tuple = (p.get_first_name(), p.get_last_name())
+
             if name_tuple in names:
                 duplicates.add(name_tuple)
             else:
                 names.add(name_tuple)
-        return duplicates
+        
+        for t in duplicates:
+            print(t[0],t[1])
 
     def __init__(self):
         self.factory = Person_Factory()
@@ -118,7 +166,7 @@ while True:
     elif cmd == "D":
         Family_Tree_Instance.decade_count()
     elif cmd == "N":
-        print("Duplicate names: ", Family_Tree_Instance.duplicate_names())
+        Family_Tree_Instance.duplicate_names()
     elif cmd == "Q":
         break
 
