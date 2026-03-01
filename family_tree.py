@@ -44,7 +44,6 @@ class Family_Tree:
                 if p_25_yo + (i*years_apart) > self.end_year:
                     child = self.factory.get_person(self.end_year, p.get_last_name())
                 else:
-                    print("Birth Year: ", p_25_yo + (i*years_apart))
                     child = self.factory.get_person(p_25_yo + (i*years_apart), p.get_last_name())
                     #only enqueue the child for processing if they're born before the end year
                     tree_queue.put(child)

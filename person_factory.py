@@ -47,11 +47,8 @@ class Person_Factory:
                 return ln_arr.iloc[i]["LastName"]
 
     def has_children(self, decade):
-        r = random.randint(0,1)
         base_children = self.bmr[self.bmr["decade"] == decade]["birth_rate"].values[0]
-        if r == 1:
-            return math.ceil(base_children+1.5)
-        return math.ceil(base_children-1.5)
+        return random.randint(math.ceil(base_children-1.5),math.ceil(base_children+1.5))
     
     #needs to take in date of birth to determine how many years older spouse is
     #generate an actual person for spouse
