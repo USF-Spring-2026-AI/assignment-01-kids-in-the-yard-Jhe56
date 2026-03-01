@@ -52,7 +52,45 @@ class Family_Tree:
                 p.add_child(child)
                 if p_spouse != None:
                     p_spouse.add_child(child)
-            
+
+    def count_people(self):
+        count_queue = Queue()
+        count_queue.put(self.MJ)
+        count = 0
+        while count_queue.empty() == False:
+            p = count_queue.get()
+            for c in p.get_children():
+                count_queue.put(c)
+            count += 1
+        return count
+
+    def decade_count(self, decade):
+        count_queue = Queue()
+        count_queue.put(self.MJ)
+        count = 0
+        while count_queue.empty() == False:
+            p = count_queue.get()
+            for c in p.get_children():
+                count_queue.put(c)
+            if int(p.get_birth_year()/10) == int(decade/10):
+                count += 1
+        return count
+
+    def duplicate_names(self):
+        count_queue = Queue()
+        count_queue.put(self.MJ)
+        names = set()
+        duplicates = set()
+        while count_queue.empty() == False:
+            p = count_queue.get()
+            for c in p.get_children():
+                count_queue.put(c)
+            name_tuple = (p.get_first_name(), p.get_last_name())
+            if name_tuple in names:
+                duplicates.add(name_tuple)
+            else:
+                names.add(name_tuple)
+        return duplicates
 
     def __init__(self):
         self.factory = Person_Factory()
@@ -65,5 +103,3 @@ class Family_Tree:
 
         self.run_queue(self.people_queue)
 
-my_family_tree = Family_Tree()
-my_family_tree.run_queue(my_family_tree.people_queue)
